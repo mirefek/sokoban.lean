@@ -1,0 +1,8 @@
+[package]
+name = "sokoban"
+version = "0.1"
+lean_version = "leanprover-community/lean:3.28.0"
+path = "src"
+
+[dependencies]
+mathlib = {git = "https://github.com/leanprover-community/mathlib", rev = "cc7e722a84da606db4bdc877b29a8c940c683a0a"}
