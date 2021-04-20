@@ -3,6 +3,7 @@ import .direction
 import .boolset2d
 import .listdec
 import .sokostate
+import .sokowidget
 
 structure sokolevel :=
 (avail : bset2d)
@@ -117,6 +118,9 @@ instance : has_to_string sokolevel := ⟨λ s,
 
 instance : has_repr sokolevel
 := ⟨λ lev, (string.append (string.append "from_string \"" (to_string lev)) "\"")⟩
+
+meta def to_html (lev : sokolevel) : widget.html empty
+  := sokowidget.build_table lev.avail lev.avail lev.ini.boxes lev.goal.boxes (bset2d.from_index lev.ini.storekeeper)
 
 --       _                 _ _  __ _           _   _             
 --   ___(_)_ __ ___  _ __ | (_)/ _(_) ___ __ _| |_(_) ___  _ __  

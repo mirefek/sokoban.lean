@@ -27,6 +27,8 @@ begin
   analyze_deadlock,
 end
 
+#html dl0_dl.to_html
+
 def dl1 := generate_local [(4,2)] [] (1,2)
 
 theorem dl1_dl : deadlock_local dl1
@@ -35,6 +37,8 @@ begin
   apply new_deadlock,
   analyze_deadlock,
 end
+
+#html dl1_dl.to_html
 
 def dl2 := generate_local [(2,2)] [] (1,2)
 def dl3 := generate_local [(3,2)] [] (1,2)
@@ -61,5 +65,8 @@ theorem dl2_dl : deadlock_local dl2
 := dl2_3_dl.1
 theorem dl3_dl : deadlock_local dl3
 := dl2_3_dl.2.1
+
+#html dl2_dl.to_html
+#html dl3_dl.to_html
 
 end deadlocks_example

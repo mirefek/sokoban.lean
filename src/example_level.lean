@@ -14,7 +14,7 @@ def lev := sokolevel.from_string "
 #eval lev
 
 example : lev.solvable :=
-begin [show_sokolevel]
+begin [show_sokolevel_w]
   sokolevel.solve_up,
   sokolevel.solve_right,
   sokolevel.solve_left,

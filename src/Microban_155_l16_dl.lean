@@ -34,7 +34,7 @@ begin
   analyze_deadlock,
 end
 
-#check dl0_dl
+#html dl0_dl.to_html
 
 def dl1 := generate_local [(7,4), (8,6), (7,7)] [] (2,2)
 
@@ -46,7 +46,7 @@ begin
   deadlocked_step dl0_dl, -- (7,7) right
 end
 
-#check dl1_dl
+#html dl1_dl.to_html
 
 def dl2 := generate_local [(5,7)] [] (2,2)
 
@@ -57,7 +57,7 @@ begin
   analyze_deadlock,
 end
 
-#check dl2_dl
+#html dl2_dl.to_html
 
 def dl3 := generate_local [(6,7)] [] (2,2)
 def dl4 := generate_local [(7,7)] [] (2,2)
@@ -80,12 +80,13 @@ begin
   },
 end
 
-#check dls3_4_dl
-
 theorem dl3_dl : deadlock_local dl3
 := dls3_4_dl.1
 theorem dl4_dl : deadlock_local dl4
 := dls3_4_dl.2.1
+
+#html dl3_dl.to_html
+#html dl4_dl.to_html
 
 def dl5 := generate_local [(8,6)] [] (2,2)
 
@@ -96,7 +97,7 @@ begin
   analyze_deadlock,
 end
 
-#check dl5_dl
+#html dl5_dl.to_html
 
 def dl6 := generate_local [(6,3)] [] (2,2)
 
@@ -107,7 +108,7 @@ begin
   analyze_deadlock,
 end
 
-#check dl6_dl
+#html dl6_dl.to_html
 
 def dl7 := generate_local [(7,4)] [] (2,2)
 
@@ -118,7 +119,7 @@ begin
   analyze_deadlock,
 end
 
-#check dl7_dl
+#html dl7_dl.to_html
 
 def dl8 := generate_local [(5,3), (6,4), (7,5)] [] (5,4)
 
@@ -131,6 +132,8 @@ begin
   deadlocked_step dl7_dl, -- (6,4) right
   deadlocked_step dl7_dl, -- (7,5) up
 end
+
+#html dl8_dl.to_html
 
 #check dl8_dl
 
@@ -146,7 +149,7 @@ begin
   deadlocked_step dl7_dl, -- (7,5) up
 end
 
-#check dl9_dl
+#html dl9_dl.to_html
 
 def dl10 := generate_local [(6,4), (5,5), (7,5)] [] (6,5)
 
@@ -160,7 +163,7 @@ begin
   deadlocked_step dl7_dl, -- (7,5) up
 end
 
-#check dl10_dl
+#html dl10_dl.to_html
 
 def dl11 := generate_local [(1,5), (3,7)] [(3,5)] (2,2)
 
@@ -171,7 +174,7 @@ begin
   analyze_deadlock,
 end
 
-#check dl11_dl
+#html dl11_dl.to_html
 
 def dl12 := generate_local [(3,5), (2,6), (3,7)] [] (2,2)
 def dl13 := generate_local [(3,5), (3,7)] [(1,5), (2,5), (1,6), (2,6)] (2,2)
@@ -202,8 +205,6 @@ begin
   },
 end
 
-#check dls12_15_dl
-
 theorem dl12_dl : deadlock_local dl12
 := dls12_15_dl.1
 theorem dl13_dl : deadlock_local dl13
@@ -212,6 +213,11 @@ theorem dl14_dl : deadlock_local dl14
 := dls12_15_dl.2.2.1
 theorem dl15_dl : deadlock_local dl15
 := dls12_15_dl.2.2.2.1
+
+#html dl12_dl.to_html
+#html dl13_dl.to_html
+#html dl14_dl.to_html
+#html dl15_dl.to_html
 
 def dl16 := generate_local [(2,5), (2,6)] [] (2,2)
 
@@ -222,7 +228,7 @@ begin
   analyze_deadlock,
 end
 
-#check dl16_dl
+#html dl16_dl.to_html
 
 def dl17 := generate_local [(1,7)] [] (2,2)
 
@@ -233,7 +239,7 @@ begin
   analyze_deadlock,
 end
 
-#check dl17_dl
+#html dl17_dl.to_html
 
 def dl18 := generate_local [(1,6), (2,7)] [] (2,2)
 
@@ -246,7 +252,7 @@ begin
   deadlocked_step dl17_dl, -- (2,7) left
 end
 
-#check dl18_dl
+#html dl18_dl.to_html
 
 def dl19 := generate_local [(3,5), (2,6), (2,7)] [] (3,6)
 
@@ -259,7 +265,7 @@ begin
   deadlocked_step dl17_dl, -- (2,7) left
 end
 
-#check dl19_dl
+#html dl19_dl.to_html
 
 def dl20 := generate_local [(2,5), (3,5), (2,7)] [] (2,2)
 def dl21 := generate_local [(3,5), (2,7)] [(1,5), (2,5), (1,6), (2,6)] (2,2)
@@ -295,6 +301,10 @@ theorem dl21_dl : deadlock_local dl21
 := dls20_22_dl.2.1
 theorem dl22_dl : deadlock_local dl22
 := dls20_22_dl.2.2.1
+
+#html dl20_dl.to_html
+#html dl21_dl.to_html
+#html dl22_dl.to_html
 
 def dl23 := generate_local [(2,6), (3,7)] [(1,5), (2,5), (3,5), (1,6)] (2,2)
 def dl24 := generate_local [(2,5), (2,7)] [(1,5), (3,5), (1,6), (2,6)] (2,2)
@@ -364,8 +374,6 @@ begin
   },
 end
 
-#check dls23_32_dl
-
 theorem dl23_dl : deadlock_local dl23
 := dls23_32_dl.1
 theorem dl24_dl : deadlock_local dl24
@@ -386,5 +394,16 @@ theorem dl31_dl : deadlock_local dl31
 := dls23_32_dl.2.2.2.2.2.2.2.2.1
 theorem dl32_dl : deadlock_local dl32
 := dls23_32_dl.2.2.2.2.2.2.2.2.2.1
+
+#html dl23_dl.to_html
+#html dl24_dl.to_html
+#html dl25_dl.to_html
+#html dl26_dl.to_html
+#html dl27_dl.to_html
+#html dl28_dl.to_html
+#html dl29_dl.to_html
+#html dl30_dl.to_html
+#html dl31_dl.to_html
+#html dl32_dl.to_html
 
 end Microban_155_l16

@@ -3,6 +3,7 @@ import .boolset2d
 import .sokostate
 import .boxint
 import .sokolevel
+import .sokowidget
 
 def boxint.generate_from_list (avail : bset2d) (boxes blocks : list (ℕ × ℕ)) (sk : ℕ × ℕ) : boxint
 :=
@@ -61,6 +62,10 @@ end
 
 def deadlock (avail : bset2d) (goal : boxes_only) (as : boxint) : Prop
 := ∀ s1 s2 : sokostate, s1 ∈ as → s2 ∈ goal → s2.reachable avail s1 → false
+
+meta def deadlock.to_html {avail : bset2d} {goal : boxes_only} {as : boxint}
+  (H : deadlocks.deadlock avail goal as) : widget.html empty
+  := sokowidget.build_table avail as.supboxes as.subboxes goal.boxes as.sk_comp
 
 lemma new_deadlocks {avail : bset2d} {goal : boxes_only} {new_dls : list boxint}
 : (∀ as : boxint, as ∈ new_dls →
