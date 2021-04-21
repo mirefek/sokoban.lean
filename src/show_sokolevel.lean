@@ -36,7 +36,6 @@ do
   s ← tactic.read,
   lev ← get_soko_format <|> return format.nil,
   tactic.save_info_thunk p (λ _, format.compose lev (tactic_state.to_format s))
---  tactic.save_widget p (widget.tc.to_component combined_component)
 
 end show_sokolevel
 
@@ -49,23 +48,31 @@ meta def istep := @tactic.istep
 
 meta def solve1 := @tactic.solve1
 
-meta def get_soko_widget : widget.tc unit empty :=
+#check tactic.read
+
+meta def get_soko_widget (s : tactic_state) (lev : sokolevel) : widget.tc unit empty :=
 widget.tc.stateless $ λ _,
 do
-  `(sokolevel.solvable %%lev_e) ← tactic.target,
-  lev ← tactic.eval_expr sokolevel lev_e,
-  s ← tactic.read,
   return [
     widget.h "div" [] [lev.to_html],
     widget.h "hr" [] [],
     widget.h "div" [] [widget.html.of_component s widget.tactic_state_widget]
   ]
 
+#check tactic.save_widget
+
 meta def save_info (p : pos) : show_sokolevel_w unit :=
 do
   s ← tactic.read,
   tactic.save_info_thunk p (λ _, tactic_state.to_format s),
-  tactic.save_widget p (widget.tc.to_component get_soko_widget)
+  tactic.try (do
+    `(sokolevel.solvable %%lev_e) ← tactic.target,
+    lev ← tactic.eval_expr sokolevel lev_e,
+    s ← tactic.read,
+    tactic.save_widget p (widget.tc.to_component (get_soko_widget s lev))
+  ),
+  return ()
+--meta def save_info (p : pos) : show_sokolevel_w unit :=
 
 end show_sokolevel_w
 
